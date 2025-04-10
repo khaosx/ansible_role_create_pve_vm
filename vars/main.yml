@@ -2,14 +2,13 @@
 # roles/ansible_role_create_pve_vm/vars/main.yml
 #  This file is meant to be committed to Git.  It should contain generic
 #  variable names without any sensitive information.  The defaults
-#  are in defaults/main.yml, and sensitive information can be placed
-#  in /var/secrets.yml
+#  are in defaults/main.yml.
 vm_name: "my-vm" # Example of a generic variable
 vm_cpus: 2
 vm_memory: 2048
 vm_disk_size: "32G"
 vm_id: 100
-vm_ostemplate: "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.gz"
+ostemplate: "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.gz"
 vm_storage: "local-lvm"
 # vm_ip: "192.168.1.150/24"
 # vm_gateway: "192.168.1.1"

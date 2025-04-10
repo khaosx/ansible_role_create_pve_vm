@@ -1,2 +1,0 @@
-# roles/ansible_role_create_pve_vm/.gitignore
-/var/secrets.yml

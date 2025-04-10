@@ -5,17 +5,6 @@
     file: defaults/main.yml
     name: ansible_role_create_pve_vm_defaults
 
-- name: Include sensitive variables from /var/secrets.yml if it exists
-  include_vars:
-    file: /var/secrets.yml
-    name: ansible_role_create_pve_vm_secrets
-  when:
-    - ansible_file.path == "/var/secrets.yml"
-    - ansible_file.state == "file"
-  check_mode: false
-  changed_when: false
-  failed_when: false
-
 - name: Create VM on Proxmox
   community.general.proxmox_kvm:
     api_url: "https://{{ proxmox_host | default(ansible_role_create_pve_vm_defaults.proxmox_host) }}:8006"

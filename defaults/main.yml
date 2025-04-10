@@ -1,7 +1,9 @@
 ---
 # roles/ansible_role_create_pve_vm/defaults/main.yml
-#  These are the default values for the variables.  They can be overridden
-#  by variables in vars/main.yml or /var/secrets.yml
+#  These are the default values for the variables. They can be overridden
+#  by variables in vars/main.yml.  Sensitive information should NOT be
+#  placed in this file, but rather passed in directly to the playbook
+#  that uses this role.
 proxmox_host: "your_proxmox_host"
 proxmox_user: "your_proxmox_user"
 proxmox_password: "your_proxmox_password"
