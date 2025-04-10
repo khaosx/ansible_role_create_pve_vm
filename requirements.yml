@@ -1,0 +1,4 @@
+# roles/ansible_role_create_pve_vm/requirements.yml
+collections:
+  - name: community.general
+    version: ">=8.0.0" # Specify a version, or a minimum version

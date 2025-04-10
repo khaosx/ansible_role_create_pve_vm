@@ -1,0 +1,22 @@
+---
+# roles/ansible_role_create_pve_vm/meta/main.yml
+galaxy_info:
+  author: your_name # Replace with your name
+  description: Creates a VM on Proxmox
+  company: Your Company # Replace with your company name, if applicable
+  license: MIT # Or your preferred license
+  min_ansible_version: "2.9" # Or your minimum required version
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - proxmox
+    - virtualization
+    - vm
+    - kvm
+dependencies: [] # Any dependencies on other roles.  Leave empty if there are none.

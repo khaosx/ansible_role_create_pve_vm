@@ -1,0 +1,49 @@
+---
+# roles/ansible_role_create_pve_vm/tasks/main.yml
+- name: Include default variables
+  include_vars:
+    file: defaults/main.yml
+    name: ansible_role_create_pve_vm_defaults
+
+- name: Include sensitive variables from /var/secrets.yml if it exists
+  include_vars:
+    file: /var/secrets.yml
+    name: ansible_role_create_pve_vm_secrets
+  when:
+    - ansible_file.path == "/var/secrets.yml"
+    - ansible_file.state == "file"
+  check_mode: false
+  changed_when: false
+  failed_when: false
+
+- name: Create VM on Proxmox
+  community.general.proxmox_kvm:
+    api_url: "https://{{ proxmox_host | default(ansible_role_create_pve_vm_defaults.proxmox_host) }}:8006"
+    username: "{{ proxmox_user | default(ansible_role_create_pve_vm_defaults.proxmox_user) }}"
+    password: "{{ proxmox_password | default(ansible_role_create_pve_vm_defaults.proxmox_password) }}"
+    node: "{{ proxmox_node | default(ansible_role_create_pve_vm_defaults.proxmox_node) }}"
+    vmid: "{{ vm_id | default(ansible_role_create_pve_vm_defaults.vm_id) }}"
+    name: "{{ vm_name | default(ansible_role_create_pve_vm_defaults.vm_name) }}"
+    memory: "{{ vm_memory | default(ansible_role_create_pve_vm_defaults.vm_memory) }}"
+    cpus: "{{ vm_cpus | default(ansible_role_create_pve_vm_defaults.vm_cpus) }}"
+    disk:
+      - size: "{{ vm_disk_size | default(ansible_role_create_pve_vm_defaults.vm_disk_size) }}"
+        type: scsi
+        storage: "{{ vm_storage | default(ansible_role_create_pve_vm_defaults.vm_storage) }}"
+    ostemplate: "{{ vm_ostemplate | default(ansible_role_create_pve_vm_defaults.vm_ostemplate) }}"
+    state: present
+    #  Uncomment the lines below if you want to configure networking.
+    #  network:
+    #    - model: virtio
+    #      bridge: "{{ vm_bridge | default(ansible_role_create_pve_vm_defaults.vm_bridge) }}"
+    #      ip: "{{ vm_ip | default(ansible_role_create_pve_vm_defaults.vm_ip) }}"
+    #      gw: "{{ vm_gateway | default(ansible_role_create_pve_vm_defaults.vm_gateway) }}"
+
+- name: Start the VM
+  community.general.proxmox_kvm:
+    api_url: "https://{{ proxmox_host | default(ansible_role_create_pve_vm_defaults.proxmox_host) }}:8006"
+    username: "{{ proxmox_user | default(ansible_role_create_pve_vm_defaults.proxmox_user) }}"
+    password: "{{ proxmox_password | default(ansible_role_create_pve_vm_defaults.proxmox_password) }}"
+    node: "{{ proxmox_node | default(ansible_role_create_pve_vm_defaults.proxmox_node) }}"
+    vmid: "{{ vm_id | default(ansible_role_create_pve_vm_defaults.vm_id) }}"
+    state: started

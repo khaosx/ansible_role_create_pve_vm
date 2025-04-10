@@ -1,0 +1,18 @@
+---
+# roles/ansible_role_create_pve_vm/defaults/main.yml
+#  These are the default values for the variables.  They can be overridden
+#  by variables in vars/main.yml or /var/secrets.yml
+proxmox_host: "your_proxmox_host"
+proxmox_user: "your_proxmox_user"
+proxmox_password: "your_proxmox_password"
+proxmox_node: "pve"
+vm_id: 100
+vm_name: "my-new-vm"
+vm_memory: 2048
+vm_cpus: 2
+vm_disk_size: "32G"
+vm_storage: "local-lvm"
+vm_ostemplate: "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.gz"
+# vm_ip: "192.168.1.150/24"
+# vm_gateway: "192.168.1.1"
+# vm_bridge: "vmbr0"
